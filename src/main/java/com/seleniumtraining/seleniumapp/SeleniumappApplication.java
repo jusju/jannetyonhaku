@@ -29,7 +29,7 @@ public class SeleniumappApplication implements CommandLineRunner {
 		WebDriver driver = driverManager.startDriver();
 		try {
 			String url = "https://www.kauppalehti.fi/yritykset/toimialat/atklaitteisto-ja-ohjelmistokonsultointi/62020?page=";
-			List<String> urList = scraper.searchCompanyUrls(driver, url, 2);
+			List<String> urList = scraper.searchCompanyUrls(driver, url, 20);
 			scraper.searchCompanyData(driver, urList);
 		} finally {
 			driverManager.stopDriver();

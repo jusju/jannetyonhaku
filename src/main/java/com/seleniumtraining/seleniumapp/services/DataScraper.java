@@ -31,7 +31,7 @@ public class DataScraper {
     // haetaan yritysten listaus-sivulta sivun yritysten url-osoitteet
     // ja tallennetaan ne listaan
     public List<String> searchCompanyUrls(WebDriver driver, String baseUrl, int totalPages) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1000));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         List<String> yritysUrls = new ArrayList<>();
 
         for (int page = 1; page <= totalPages; page++) {
@@ -58,7 +58,7 @@ public class DataScraper {
     }
 
     public void searchCompanyData(WebDriver driver, List<String> yritykset) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1000));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String status = "";
 
         for (String yritysSivu : yritykset) {
@@ -111,21 +111,36 @@ public class DataScraper {
 
                             if (datatype.equals("Y-tunnus")) {
                                 yritys.setyTunnus(data);
+                                System.out.println("Y-tunnus: ");
+                                System.out.println(data);
                             } else if (datatype.equals("Yrityksen nimi")) {
+                                System.out.println("Yrityksen nimi: ");
+                                System.out.println(data);
                                 yritys.setYritysNimi(data);
                             } else if (datatype.equals("Toimitusjohtaja")) {
+                                System.out.println("Toimitusjohtaja: ");
+                                System.out.println(data);
                                 yritys.setToimitusjohtaja(data);
                             } else if (datatype.equals("Postiosoite")) {
                                 String[] osoitedata = data.split(",");
                                 yritys.setPostiosoite(osoitedata[0]);
                                 String[] postinumeroJaPostitoimipaikka = osoitedata[1].trim().split(" ");
+                                System.out.println("Postinumero ja postitoimipaikka: ");
+                                System.out.println(postinumeroJaPostitoimipaikka[0] + " "
+                                        + postinumeroJaPostitoimipaikka[1]);
                                 yritys.setPostinumero(postinumeroJaPostitoimipaikka[0]);
                                 yritys.setPostitoimipaikka(postinumeroJaPostitoimipaikka[1]);
                             } else if (datatype.equals("Puhelin")) {
+                                System.out.println("Puhelin: ");
+                                System.out.println(data);
                                 yritys.setPuhelinnumero(data);
                             } else if (datatype.equals("Sähköposti")) {
+                                System.out.println("Sähköposti: ");
+                                System.out.println(data);
                                 yritys.setSahkoposti(data);
                             } else if (datatype.equals("Toimialakuvaus")) {
+                                System.out.println("Toimialakuvaus: ");
+                                System.out.println(data);
                                 yritys.setToimialakuvaus(data);
                             }
                         } catch (Exception e) {
